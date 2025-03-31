@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %} Export Users {% endblock %}
+{% block body %}
+<div class="col-8 my-3 mx-auto border shadow p-4" style="border-radius:1rem">
+    <h3>Export Users</h3>
+    <hr>
+    <p>Click the button below to export all users to an Excel file.</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success">Export Users</button>
+    </form>
+</div>
+{% endblock %}
