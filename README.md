@@ -1,64 +1,103 @@
-Django Admin and User Management System
+```markdown
+# Django Admin and User Management System
 
+This is a Django-based web application that provides a simple but functional admin and user management system. The system includes user registration, login, password management, and admin tools to manage users via a dashboard.
 
-This project is a simple Django web application for managing users through an admin panel. It supports admin login, user registration, user login, and profile management features like editing, blocking, deleting, and password changes.
+This project was originally inspired by a PHP class project. I decided to build it using Django to enhance my understanding of Python web development and explore how Django handles authentication and user management out of the box.
 
--Features
-    Admin Side
-    Admin login/logout
-    View all registered users
-    Add new users
-    Edit user details
-    Block/unblock users (toggle staff status)
-    Delete users
-    Search users by username
--User Side
-   Register a new user
-   Login/logout
-   Change password
--Technologies Used
-   Django (Python Framework)
-   HTML templates
-   Django Authentication system
+## Features
 
-Folder Structure
-views.py: Contains all admin and user views
-templates/: HTML files for frontend (adminhome, login, register, changepassword, etc.)
-urls.py: URL patterns for routing
+### Admin Panel
+- Admin login and logout
+- View all registered users
+- Add new users
+- Edit user information
+- Block or unblock users by toggling their staff status
+- Delete users
+- Search users by username
 
-How to Run the Project
-1 Clone the Repository
-      git clone https://github.com/mercycermy/usermanegment.git
-      cd django-user-admin
+### User Side
+- User registration
+- User login and logout
+- Change password
 
-2 Set up a virtual environment (optional but recommended)
-      python -m venv venv
-      source venv/bin/activate  # On Windows use venv\Scripts\activate
+## Technologies Used
 
-3 Install Dependencies
-     pip install -r req.txt
+- Django (Python Framework)
+- HTML Templates
+- Django Authentication System
 
-4 Run Migrations
-        python manage.py migrate
+## Folder Structure
 
-5  Create a Superuser
-    python manage.py createsuperuser
+```
+project/
+├── templates/             # HTML files (adminhome, login, register, etc.)
+├── views.py               # Admin and user logic
+├── urls.py                # URL routes
+├── models.py              # User model (using Django's default User model)
+├── manage.py              # Django project manager
+├── requirements.txt       # Python dependencies
+```
 
-6   Run the Server
-      python manage.py runserver
+## How to Run the Project
 
+### Step 1: Clone the Repository
 
-                  Access the App
-Admin Panel: http://localhost:8000/adminlogin
+```bash
+git clone https://github.com/mercycermy/usermanegment.git
+cd django-user-admin
+```
 
-User Login/Register: http://localhost:8000/login
+### Step 2: Set Up a Virtual Environment (optional but recommended)
 
-Notes
-Only users with is_superuser=True can log in as admin.
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
+```
 
-Blocking a user will toggle their is_staff status.
+### Step 3: Install Dependencies
 
-You can manage passwords securely using Django's built-in tools.
+```bash
+pip install -r req.txt
+```
 
-Contribution
-Feel free to fork and contribute. If you spot a bug or have a suggestion, submit an issue or a pull request.
+### Step 4: Apply Migrations
+
+```bash
+python manage.py migrate
+```
+
+### Step 5: Create a Superuser
+
+```bash
+python manage.py createsuperuser
+```
+
+### Step 6: Run the Server
+
+```bash
+python manage.py runserver
+```
+
+## Access the Application
+
+- Admin Panel: http://localhost:8000/adminlogin  
+- User Login/Register: http://localhost:8000/login
+
+## Notes
+
+- Only superusers (`is_superuser=True`) can access the admin panel.
+- The block/unblock feature toggles the `is_staff` flag to manage user access.
+- Passwords are handled securely using Django's built-in authentication system.
+- Custom views are used to separate admin and user functionality cleanly.
+
+## Contribution
+
+Contributions are welcome. If you notice a bug or have a suggestion for improvement:
+
+1. Fork the repository
+2. Make your changes
+3. Submit a pull request
+
+Alternatively, you can open an issue to discuss the changes.
+
