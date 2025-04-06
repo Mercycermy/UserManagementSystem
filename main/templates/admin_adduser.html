@@ -1,0 +1,134 @@
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        body {
+            background-color: #fff;
+            color: #000;
+        }
+
+        nav.navbar {
+            background-color: #000;
+            color: #fff;
+        }
+
+        nav.navbar .navbar-brand, nav.navbar .nav-link {
+            color: #0a0a0a;
+        }
+
+        nav.navbar .navbar-brand:hover, nav.navbar .nav-link:hover {
+            color: #272626;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .border {
+            border-radius: 1rem;
+            background-color: #fff;
+            color: #000;
+        }
+
+        .display-4 {
+            color: #000;
+        }
+
+        .btn-primary {
+            background-color: #000;
+            border-color: #000;
+        }
+
+        .btn-primary:hover {
+            background-color: #333;
+            border-color: #333;
+        }
+
+        .form-control {
+            border-radius: 0.5rem;
+        }
+
+        .alert {
+            border-radius: 0.5rem;
+        }
+
+        .m-2 {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="admin_homepage">Admin Panel</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="admin_homepage">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="user_add">Add User</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin_logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="border shadow col-lg-6 p-5 mt-2 mx-auto">
+            <div class="display-4 text-center">Add User</div>
+            <hr>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        <strong>{{ message.tags|capfirst }}! </strong>{{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="m-2">
+                    <input type="text" class="form-control" placeholder="Username" name="username" id="username" required>
+                    {% if form.username.errors %}
+                        <div class="alert alert-danger">{{ form.username.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="m-2">
+                    <input type="text" class="form-control" placeholder="Firstname" name="firstname" id="firstname">
+                </div>
+                <div class="m-2">
+                    <input type="text" class="form-control" placeholder="Lastname" name="lastname" id="lastname">
+                </div>
+                <div class="m-2">
+                    <input type="email" class="form-control" placeholder="Email" name="email" id="email" required>
+                </div>
+                <div class="m-2">
+                    <input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
+                </div>
+                <div class="m-2">
+                    <button type="submit" class="btn btn-primary btn-block">Create User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

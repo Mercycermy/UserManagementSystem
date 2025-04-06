@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'adminlogin/adminlogin.css' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdminLogin</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <style>
+        body {
+            background-color: #fff; 
+            font-family: 'Arial', sans-serif;
+            color: #0a0a0a; 
+        }
+
+        #login {
+            margin-top: 100px;
+        }
+
+        
+
+        #login-box {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        h3.text-info {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            border-radius: 25px;
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #444; /* Dark input fields */
+            color: #fff; /* White text inside input */
+            border: 1px solid #555; /* Lighter border */
+        }
+
+        .form-control:focus {
+            background-color: #fffefe; /* Slightly lighter when focused */
+            border-color: #777;
+        }
+
+        .btn-info {
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #333; /* Dark button */
+            color: #fff;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-info:hover {
+            background-color: #555; /* Lighter button on hover */
+        }
+
+        .form-group a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .form-group a:hover {
+            text-decoration: underline;
+        }
+
+        .text-center p {
+            color: red;
+            font-size: 14px;
+        }
+
+        .text-info {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="login">
+        <h3 class="text-center text-white pt-5">Login Form</h3>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" method="post">
+                            {% csrf_token %}
+                            <h3 class="text-center text-info">Admin Login</h3>
+
+                            <div class="form-group">
+                                <label for="username" class="text-info">Username:</label><br>
+                                <input type="text" name="username" id="username" class="form-control" placeholder="Enter your username">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password" class="text-info">Password:</label><br>
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password">
+                            </div>
+
+                            {% for message in messages %}
+                                <p class="text-center">{{ message }}</p>
+                            {% endfor %}
+
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="Login">
+                            </div>
+
+                            <div class="form-group text-center">
+                                <a href="/">Back to Home</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
