@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% block title %} Home Page {% endblock %}
+{% block body %}
+<style>
+    .upper {
+        text-transform: uppercase;
+    }
+
+    .card-container {
+        border-radius: 1rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        padding: 2rem;
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    .card-header {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    .welcome-card {
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        background-color: #f9f9f9;
+        text-align: center;
+    }
+
+    .welcome-message {
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: #2c3e50;
+        margin-bottom: 20px;
+    }
+
+    .btn-group {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .btn {
+        font-size: 1rem;
+        padding: 0.5rem 1.25rem;
+        border-radius: 0.5rem;
+    }
+
+    .btn-primary {
+        background-color: #3498db;
+        border-color: #3498db;
+    }
+
+    .btn-primary:hover {
+        opacity: 0.8;
+    }
+
+    .modal-header .modal-title {
+        font-size: 1.25rem;
+        color: #2c3e50;
+    }
+
+    .alert {
+        font-size: 1.1rem;
+        border-radius: 0.5rem;
+    }
+
+    .alert-dismissible .btn-close {
+        padding: 0.25rem 0.5rem;
+    }
+</style>
+
+<div class="container">
+    <div class="card-container col-lg-8 mx-auto">
+        <div class="card-header">
+            Welcome to the System, {{ request.user.first_name }}!
+        </div>
+        <hr>
+
+        {% if messages %}
+        {% for message in messages %}
+        <div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible fade show" {% endif %}
+            role="alert">
+            <strong><span class="upper">{{ message.tags }}</span>!</strong> {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <div class="welcome-card">
+            <div class="welcome-message">
+                Hello, {{ request.user.first_name }}! We're excited to have you on board.
+            </div>
+            <p>Feel free to explore the system and let us know if you need any assistance!</p>
+            <div class="btn-group">
+                <a href="/login" class="btn btn-sm btn-primary">Go to Profile</a>
+                {% if request.user.is_superuser %}
+                <a href="/admin-dashboard" class="btn btn-sm btn-primary">Admin Dashboard</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/adduser" class="form-horizontal" method="post">
+                    {% csrf_token %}
+                    <div class="m-2">
+                        <input type="text" class="form-control" placeholder="Firstname" name="firstname" required>
+                    </div>
+                    <div class="m-2">
+                        <input type="text" class="form-control" placeholder="Lastname" name="lastname" required>
+                    </div>
+                    <div class="m-2">
+                        <input type="email" class="form-control" placeholder="Email" name="email" required>
+                    </div>
+                    <div class="m-2">
+                        <input type="password" class="form-control" placeholder="Password" name="password" required>
+                    </div>
+                    <div class="m-2 float-end">
+                        <button type="submit" class="btn btn-primary">Add User</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

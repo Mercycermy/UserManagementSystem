@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %} Register {% endblock %}
+
+{% block body %}
+<style>
+    .upper {
+        text-transform: uppercase;
+    }
+
+    body {
+        background-color: #ffffff;
+        color: #000000;
+    }
+
+    .border {
+        background-color: #ffffff;
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .display-4 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: #000000;
+        text-align: center;
+    }
+
+    .btn-primary {
+        background-color: #000000;
+        color: #ffffff;
+        border: 1px solid #000000;
+    }
+
+    .btn-primary:hover {
+        background-color: #444444;
+        color: #ffffff;
+    }
+
+    .alert {
+        color: #ffffff;
+        background-color: #444;
+        border: 1px solid #666;
+    }
+
+    .alert-dismissible .btn-close {
+        color: #ffffff;
+    }
+
+    .form-control {
+        background-color: #f4f4f4;
+        border: 1px solid #ddd;
+        color: #000000;
+    }
+
+    .form-control:focus {
+        background-color: #ffffff;
+        border-color: #888;
+        color: #000000;
+    }
+
+    .m-2 {
+        margin: 0.5rem;
+    }
+
+    .text-center a {
+        color: #000000;
+        text-decoration: none;
+    }
+
+    .text-center a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="border shadow col-lg-6 p-5 mt-2 mx-auto">
+    <div class="display-4">Register</div>
+    <hr>
+
+    {% if messages %}
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show " {% endif %} role="alert">
+        <strong><span class="upper">{{ message.tags }}! </span></strong>{{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <form action="" class="form-horizontal" method="post">
+        {% csrf_token %}
+        <div class="m-2">
+            <input type="text" class="form-control" placeholder="Firstname" name="firstname" id="">
+        </div>
+        <div class="m-2">
+            <input type="text" class="form-control" placeholder="Lastname" name="lastname" id="">
+        </div>
+        <div class="m-2">
+            <input type="email" class="form-control" placeholder="Email" name="email" id="">
+        </div>
+        <div class="m-2">
+            <input type="password" class="form-control" placeholder="Password" name="password" id="">
+        </div>
+        <div class="m-2">
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </div>
+    </form>
+
+    <!-- Add a link to login page if the user already has an account -->
+    <div class="text-center mt-3">
+        <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+    </div>    
+
+</div>
+
+{% endblock %}

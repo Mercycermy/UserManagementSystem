@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block body %}
+<style>
+    .upper {
+        text-transform: uppercase;
+    }
+
+    body {
+        background-color: #ffffff;
+        color: #000000;
+        font-family: Arial, sans-serif;
+    }
+
+    .border {
+        background-color: #ffffff;
+        border-radius: 1rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+    }
+
+    .display-4 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: #000000;
+        text-align: center;
+    }
+
+    .btn-primary {
+        background-color: #000000;
+        color: #ffffff;
+        border: 1px solid #000000;
+    }
+
+    .btn-primary:hover {
+        background-color: #333333;
+        color: #ffffff;
+    }
+
+    .btn-dark {
+        background-color: #007bff;
+        color: #ffffff;
+        border: 1px solid #007bff;
+    }
+
+    .btn-dark:hover {
+        background-color: #0056b3;
+        color: #ffffff;
+    }
+
+    .alert {
+        color: #000000;
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+    }
+
+    .alert-dismissible .btn-close {
+        color: #000000;
+    }
+
+    .form-control {
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        color: #000000;
+    }
+
+    .form-control:focus {
+        background-color: #fff;
+        border-color: #007bff;
+        color: #000000;
+    }
+
+    .m-2 {
+        margin: 0.5rem;
+    }
+
+    .text-center a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .text-center a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="border shadow col-lg-6 p-5 mt-2 mx-auto">
+    <div class="display-4">Login</div>
+    <hr>
+    
+    {% if messages %}
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible fade show " {% endif %} role="alert">
+        <strong><span class="upper">{{ message.tags }}!</span></strong>{{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <!-- Admin Panel Button -->
+    <div class="text-center mt-3">
+        <a href="{% url 'adminlogin' %}">
+            <button type="button" class="btn btn-dark">
+                Admin Panel
+            </button>
+        </a>
+    </div>
+
+    <form action="" class="form-horizontal" method="post">
+        {% csrf_token %}
+        <div class="m-2">
+            <input type="text" class="form-control" placeholder="Username" name="username" id="username">
+        </div>
+        <div class="m-2">
+            <input type="password" class="form-control" placeholder="Password" name="password" id="password">
+        </div>
+        <div class="m-2">
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </div>
+    </form>
+
+    <!-- Sign Up Link -->
+    <div class="text-center mt-3">
+        <p>Don't have an account? <a href="{% url 'register' %}">Sign up here</a></p>
+    </div>
+</div>
+
+{% endblock %}
