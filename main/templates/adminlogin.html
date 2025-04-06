@@ -1,125 +1,117 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link rel="stylesheet" href="{% static 'adminlogin/adminlogin.css' %}">
+    <link rel="stylesheet" href="adminlogin/adminlogin.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdminLogin</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Admin Login</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <style>
         body {
-            background-color: #fff; 
-            font-family: 'Arial', sans-serif;
-            color: #0a0a0a; 
+            background-color: #ffffff;
+            color: #000000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         #login {
-            margin-top: 100px;
+            margin-top: 80px;
         }
 
-        
-
         #login-box {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            background-color: #ebebeb;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(255, 255, 255, 0.05);
+            padding: 40px;
         }
 
         h3.text-info {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #fff;
+            font-size: 28px;
+            color: #000000;
+            margin-bottom: 30px;
+            text-align: center;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .form-group label {
+            font-weight: 600;
+            color: #ccc;
         }
 
         .form-control {
-            border-radius: 25px;
-            padding: 10px 15px;
-            font-size: 16px;
-            background-color: #444; /* Dark input fields */
-            color: #fff; /* White text inside input */
-            border: 1px solid #555; /* Lighter border */
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 15px;
+            background-color: #222;
+            color: #fff;
+            border: 1px solid #444;
+        }
+
+        .form-control::placeholder {
+            color: #888;
         }
 
         .form-control:focus {
-            background-color: #fffefe; /* Slightly lighter when focused */
             border-color: #777;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.2);
         }
 
         .btn-info {
-            border-radius: 25px;
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #333; /* Dark button */
-            color: #fff;
+            border-radius: 10px;
+            padding: 12px;
+            width: 100%;
+            background-color: #333;
             border: none;
-            transition: background-color 0.3s;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
 
         .btn-info:hover {
-            background-color: #555; /* Lighter button on hover */
-        }
-
-        .form-group a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 14px;
-        }
-
-        .form-group a:hover {
-            text-decoration: underline;
+            background-color: #555;
         }
 
         .text-center p {
             color: red;
             font-size: 14px;
         }
-
-        .text-info {
-            font-weight: bold;
-        }
     </style>
 </head>
+
 <body>
 
     <div id="login">
-        <h3 class="text-center text-white pt-5">Login Form</h3>
         <div class="container">
-            <div id="login-row" class="row justify-content-center align-items-center">
-                <div id="login-column" class="col-md-6">
-                    <div id="login-box" class="col-md-12">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div id="login-box">
                         <form id="login-form" class="form" method="post">
                             {% csrf_token %}
-                            <h3 class="text-center text-info">Admin Login</h3>
+                            <h3 class="text-info">Admin Login</h3>
 
                             <div class="form-group">
-                                <label for="username" class="text-info">Username:</label><br>
-                                <input type="text" name="username" id="username" class="form-control" placeholder="Enter your username">
+                                <label for="username">Username</label>
+                                <input type="text" name="username" id="username" class="form-control"
+                                    placeholder="Enter your username">
                             </div>
 
                             <div class="form-group">
-                                <label for="password" class="text-info">Password:</label><br>
-                                <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="password" class="form-control"
+                                    placeholder="Enter your password">
                             </div>
 
                             {% for message in messages %}
-                                <p class="text-center">{{ message }}</p>
+                            <p class="text-center">{{ message }}</p>
                             {% endfor %}
 
                             <div class="form-group">
-                                <input type="submit" name="submit" class="btn btn-info btn-md" value="Login">
-                            </div>
-
-                            <div class="form-group text-center">
-                                <a href="/">Back to Home</a>
+                                <input type="submit" name="submit" class="btn btn-info" value="Login">
                             </div>
                         </form>
                     </div>
@@ -129,4 +121,5 @@
     </div>
 
 </body>
+
 </html>
